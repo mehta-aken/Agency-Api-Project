@@ -63,8 +63,6 @@ app.form = function(){
 		e.preventDefault();
 		var movieName = $('#movie-name').val();
 		$('#movie-name').val('');
-
-		console.log(movieName);
 		app.getMovieFromForm(movieName);
 	});
 }
@@ -83,7 +81,9 @@ app.getMovieFromForm = function(movieName){
 	.then(function(res){
 		var movie = {}
 		movie.title = res.results[0].title;
-		movie.image = movieImageBaseUrl + res.results[0].poster_path
+		movie.image = movieImageBaseUrl + res.results[0].poster_path;
+		movie.overview = res.results[0].overview;
+		movie.releaseDate = res.results[0].release_date;
 		console.log(movie);
 		app.displayContentForm(movie);
 	});
