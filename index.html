@@ -2,19 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<title>TrackFlix</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400|Open+Sans" rel="stylesheet">
 	<link rel="stylesheet" href="public/styles/style.css">
-	<title>TrackFlix</title>
-=======
-
-	<title>Project5</title>
-	<link rel="stylesheet" href="public/styles/style.css">
 	<link rel="stylesheet" href="public/styles/tiltedpage-scroll.css">
->>>>>>> c995d28c1a93d5ef0d243ca82bdd5db50d87bb3d
 </head>
 <body>
 	<header>
@@ -23,34 +17,33 @@
 			<p>Today's Top 5 Movies</p>
 			<p>And something about songs</p>
 		</div>
+
 		<script id="data" type="text/x-handlebars-template">
 			<li class="container" id="{{id}}">
-				<div class="movie">
-					<h2>{{title}}</h2>
-					<img src="{{image}}" alt="movie-poster" style="width: 200px;">
-					<p>{{overview}}</p>
-					<p>Release Date: {{releaseDate}}</p>
-				</div>	
-				<div class="songs">
+		 		<h2>{{title}}</h2>
+	 			<div class="left">
+	 				<img src="{{image}}" alt="movie-poster" style="width: 200px;">
+	 				<p>Release Date: {{releaseDate}}</p>
+	 			</div>
+	 			<div class="right">
+	 				<p class="overview">{{overview}}</p>
+	 			</div>
+				<div class="spotify">
 					{{#each uris}}
-					<iframe src="https://open.spotify.com/embed?uri={{this}}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+					<iframe class="iframe" src="https://open.spotify.com/embed?uri={{this}}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
 					{{/each}}
-				
 				</div>
 			</li>
 		</script>
+
 	</header>
 
-<<<<<<< HEAD
 		<form> <!-- SEARCH -->
 			<label for="movie-name">Movie Name</label>
 			<input id="movie-name" type="text">
 			<input type="submit">
 		</form>
 		<ul style="list-style-type: none;"></ul>
-=======
-	<ul style="list-style-type: none;"></ul>
->>>>>>> c995d28c1a93d5ef0d243ca82bdd5db50d87bb3d
 
 		<footer>
 			<div class="footer f-top">
@@ -59,10 +52,7 @@
 			<div class="footer f-bottom">
 				<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20out%20TrackFlix!" data-size="large"><i class="fa fa-twitter-square" aria-hidden="true"></i></a> 
 			</div>
-<<<<<<< HEAD
 		</footer>
-=======
-
 			<div class="spotify">
 				{{#each uris}}
 				<iframe class="iframe" src="https://open.spotify.com/embed?uri={{this}}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
@@ -71,14 +61,10 @@
 		</li>
 	</script>
 
->>>>>>> c995d28c1a93d5ef0d243ca82bdd5db50d87bb3d
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<<<<<<< HEAD
-=======
 	<script src="public/scripts/jquery.tiltedpage-scroll.min.js"></script>
->>>>>>> c995d28c1a93d5ef0d243ca82bdd5db50d87bb3d
 	<script src="public/scripts/main.js"></script>
+	
 </body>
 </html>
