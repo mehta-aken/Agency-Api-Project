@@ -16,10 +16,12 @@ $VerySoftBlue: #a8c0db;
 
 body {
   margin: 0;
+  background: linear-gradient(0deg,rgba(85, 98, 112, .85),rgba(85, 98, 112, .5)), url(../../images/background2.jpg);
+  background-attachment: fixed;
 }
 
 header {
-  background: linear-gradient(0deg,rgba(85, 98, 112, .85),rgba(85, 98, 112, .5)), url(../../images/background2.jpg);
+  // background: linear-gradient(0deg,rgba(85, 98, 112, .85),rgba(85, 98, 112, .5)), url(../../images/background2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
