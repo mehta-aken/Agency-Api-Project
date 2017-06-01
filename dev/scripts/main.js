@@ -6,18 +6,11 @@ const movieApiKey = 'f012df5d63927931e82fe659a8aaa3ac';
 const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
-const albumToken = 'Bearer BQAjiK8tH87pWSKZNkVqeBwGUa7qv0yNe6t4d2qpJORjBWYuof3zuhPdOCTeHCH01nZWSzTX8LP1h-M8y1sw1Mco3xyta4uomGzMbAO4WwEjbaqnBem4Se595k0l5j11wGSraPDbcbI';
+const albumToken = 'Bearer BQAJEm2mLMHGemY3rYUmz01_MaXNJFsK32bzhtNFXAeESXKlZ3GLU_xyQI_gDXqdJBfLvhxtpKN9_kFS9MSn1fbcWZFR8VMUPf9Dpe-cYEf9q6QnoD_g4ssr-1l2w8whHrEtvUSAmi8';
 
 // document ready function
 $(function(){
 	app.init();
-	$(".test").tiltedpage_scroll({
-	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
-	  angle: 50,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
-	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
-	  scale: true,                       // You can toggle the scaling effect here as well. The default value is true.
-	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
-	});
 });
 
 // functions fired on page load
@@ -83,9 +76,9 @@ app.getTracks = function(promises) {
 				});
 				app.pushToHandleBars(app.moviesArray[index]);
 			});
+			app.tilt();
 			// finally what we end up with is an array that contains five objects. each object represents one movie. each movie has a uris property which is an array, and this array contains three spotify ids that correspond to the three tracks that are most popular for that particular movie
-		});
-	
+		});	
 }
 
 app.getAlbumData = function(movieName){
@@ -163,4 +156,14 @@ app.displayContentForm = function(){
 	var finalDataTemplate = compileDataTemplate(movie);
 
 	$('ul').html(finalDataTemplate);
+}
+
+app.tilt = function() {
+	$(".test").tiltedpage_scroll({
+	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
+	  angle: 50,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
+	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
+	  scale: true,                       // You can toggle the scaling effect here as well. The default value is true.
+	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
+	});
 }
