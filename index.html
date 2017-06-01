@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<title>Project5</title>
-	<link rel="stylesheet" href="dev/styles/tiltedpage-scroll.css">
 	<link rel="stylesheet" href="public/styles/style.css">
+	<link rel="stylesheet" href="public/styles/tiltedpage-scroll.css">
 </head>
 <body>
 	<form>
@@ -15,29 +15,32 @@
 		<input type="submit">
 	</form>
 
-	<ul class="test" style="list-style-type: none;"></ul>
+	<ul style="list-style-type: none;"></ul>
 
 	<script id="data" type="text/x-handlebars-template">
-		<li class="container" id="{{id}}">
-				<h2>{{title}}</h2>
-			<div class="left">
-				<img src="{{image}}" alt="movie-poster" style="width: 200px;">
-				<p>Release Date: {{releaseDate}}</p>
-			</div>
-			
-			<div class="right">
-				<p class="overview">{{overview}}</p>
-			</div>
+			<li class="container" id="{{id}}">
+					<h2>{{title}}</h2>
+				<div class="left">
+					<img src="{{image}}" alt="movie-poster" style="width: 200px;">
+					<p>Release Date: {{releaseDate}}</p>
+				</div>
+				
+				<div class="right">
+					<p class="overview">{{overview}}</p>
+				</div>
 
-			<div class="spotify">
-				{{#each uris}}
-				<iframe class="iframe" src="https://open.spotify.com/embed?uri={{this}}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
-				{{/each}}
+				<div class="spotify">
+					{{#each uris}}
+					<iframe class="iframe" src="https://open.spotify.com/embed?uri={{this}}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
+					{{/each}}
+				</div>
+			</li>
+	</script>
 
-		
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="dev/scripts/jquery.tiltedpage-scroll.min.js"></script>
+	<script src="public/scripts/jquery.tiltedpage-scroll.min.js"></script>
 	<script src="public/scripts/main.js"></script>
 </body>
 </html>
