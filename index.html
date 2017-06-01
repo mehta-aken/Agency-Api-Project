@@ -3,18 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Project05</title>
-
-	<script id="data" type="text/x-handlebars-template">
-		<li class="container">
-			<div class="movie">
-				<h2>{{title}}</h2>
-				<img src="{{image}}" alt="movie-poster" style="width: 200px;">
-				<p>{{overview}}</p>
-				<p>Release Date: {{releaseDate}}</p>
-			</div>	
-		</li>
-	</script>
+	<title>Project5</title>
 </head>
 <body>
 	<form>
@@ -24,8 +13,24 @@
 	</form>
 	<ul style="list-style-type: none;"></ul>
 
+	<script id="data" type="text/x-handlebars-template">
+		<li class="container" id="{{id}}">
+			<div class="movie">
+				<h2>{{title}}</h2>
+				<img src="{{image}}" alt="movie-poster" style="width: 200px;">
+				<p>{{overview}}</p>
+				<p>Release Date: {{releaseDate}}</p>
+			</div>	
+			<div class="songs">
+				{{#each uris}}
+				<iframe src="https://open.spotify.com/embed?uri={{this}}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+				{{/each}}
+			
+			</div>
+		</li>
+	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="dev/scripts/main.js"></script>
+	<script src="public/scripts/main.js"></script>
 </body>
 </html>
