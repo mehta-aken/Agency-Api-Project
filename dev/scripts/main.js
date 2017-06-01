@@ -159,7 +159,7 @@ app.displayContentForm = function(){
 }
 
 app.tilt = function() {
-	$(".test").tiltedpage_scroll({
+	$("ul").tiltedpage_scroll({
 	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
 	  angle: 50,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
 	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
