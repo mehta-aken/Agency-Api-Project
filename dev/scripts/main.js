@@ -6,11 +6,18 @@ const movieApiKey = 'f012df5d63927931e82fe659a8aaa3ac';
 const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
-const albumToken = 'Bearer BQBYcgBGPN_WQuKf2vxtnJWD5D6bKaQNtv8_LH1D7JdfjcAkgA1qsqtZfHPWi1ag663ETe5VWzR1q7xkhF1qwOkzEorcZ034GXFurMMXSryT6nfxP87gVbhvw96ec0Y7GAVPJat2sZB55WurdW43vDZbj_Qm';
+const albumToken = 'Bearer BQAjiK8tH87pWSKZNkVqeBwGUa7qv0yNe6t4d2qpJORjBWYuof3zuhPdOCTeHCH01nZWSzTX8LP1h-M8y1sw1Mco3xyta4uomGzMbAO4WwEjbaqnBem4Se595k0l5j11wGSraPDbcbI';
 
 // document ready function
 $(function(){
 	app.init();
+	$(".test").tiltedpage_scroll({
+	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
+	  angle: 50,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
+	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
+	  scale: true,                       // You can toggle the scaling effect here as well. The default value is true.
+	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
+	});
 });
 
 // functions fired on page load
