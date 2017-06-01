@@ -18,23 +18,23 @@
 	<ul style="list-style-type: none;"></ul>
 
 	<script id="data" type="text/x-handlebars-template">
-			<li class="container" id="{{id}}">
-					<h2>{{title}}</h2>
-				<div class="left">
-					<img src="{{image}}" alt="movie-poster" style="width: 200px;">
-					<p>Release Date: {{releaseDate}}</p>
-				</div>
-				
-				<div class="right">
-					<p class="overview">{{overview}}</p>
-				</div>
+		<li class="container" id="{{id}}">
+				<h2>{{title}}</h2>
+			<div class="left">
+				<img src="{{image}}" alt="movie-poster" style="width: 200px;">
+				<p>Release Date: {{releaseDate}}</p>
+			</div>
+			
+			<div class="right">
+				<p class="overview">{{overview}}</p>
+			</div>
 
-				<div class="spotify">
-					{{#each uris}}
-					<iframe class="iframe" src="https://open.spotify.com/embed?uri={{this}}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
-					{{/each}}
-				</div>
-			</li>
+			<div class="spotify">
+				{{#each uris}}
+				<iframe class="iframe" src="https://open.spotify.com/embed?uri={{this}}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
+				{{/each}}
+			</div>
+		</li>
 	</script>
 
 
