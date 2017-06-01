@@ -6,7 +6,10 @@ const movieApiKey = 'f012df5d63927931e82fe659a8aaa3ac';
 const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
-const albumToken = 'Bearer BQBRcb4pUtuy95soZ9nM_-W7dfzL1dh41KhCVc1EhlEA9jcUw0Rb55eJBuiMYT2p-0QaWCuX42szM0DouCymjaHxEcFYuvXTJJWoKvEk8WgvbHrdVUBq3xT7haq_YFqzrQkSUUYr_u0';
+
+const albumToken = 'Bearer BQCvqKgiJ-KCY8CSPq0Acy0laqbS9-pAdIc1mnjkz5VhJ1K4LW2mRdlTHQDwCm_S-Ixeqwa8NBOEeDG3PBqgWYzcp8-rAvModTbm0EgHxGOO4DE8-CgHfD5-f8Zijoo80BQHYkHbYHd1GTWCKcMBDMUB4NE5';
+
+
 
 // document ready function
 $(function(){
@@ -16,7 +19,7 @@ $(function(){
 // functions fired on page load
 app.init = function(){
 	app.getMoviesData();
-	// app.form();
+	app.form();
 }
 
 // getting data from moviebd api
@@ -89,7 +92,7 @@ app.getAlbumData = function(movieName){
 			Authorization: albumToken
 		},
 		data: {
-			q: movieName,
+			q: movieName + ' soundtrack',
 			type: 'album',
 			limit: 1
 		}
@@ -117,40 +120,57 @@ app.pushToHandleBars = function(data){
 	$('ul').append(finalDataTemplate);
 }
 
-// app.form = function(){
-// 	$('form').on('submit', function(e){
-// 		e.preventDefault();
-// 		var movieName = $('#movie-name').val();
-// 		$('#movie-name').val('');
+app.form = function(){
+	$('form').on('submit', function(e){
+		e.preventDefault();
+		var movieName = $('#movie-name').val();
+		$('#movie-name').val('');
+		var movie = {};
+		var getMoviesDataPromise = app.getMovieFromForm(movieName);
+		var albumIdPromise = app.getAlbumData(movieName);
 
-// 		console.log(movieName);
-// 		app.getMovieFromForm(movieName);
-// 		app.getAlbumData(movieName);
-// 	});
-// }
+		$.when(getMoviesDataPromise)
+			.then(function(data){
+				var movies = data.results[0];
+				movie.id = 0;
+				movie.title = movies.title;
+				movie.image = movieImageBaseUrl + movies.poster_path;
+				movie.overview = movies.overview;
+				movie.releaseDate = movies.release_date;
+			});
+			
+		$.when(albumIdPromise)
+			.then(function(album){
+				var albumId = album.albums.items[0].id;
+				var getSingleAlbum = app.getTracksByAlbumId(albumId);
 
-app.getMovieFromForm = function(movieName){
-	$.ajax({
-		url: movieBaseApiUrl + '/search/movie',
-		method: 'GET',
-		dataType: 'JSON',
-		data: {
-			api_key: movieApiKey,
-			language: 'en-US',
-			query: movieName
-		}
-	})
-	.then(function(res){
-		var movie = {}
-		movie.title = res.results[0].title;
-		movie.image = movieImageBaseUrl + res.results[0].poster_path;
-		movie.overview = res.results[0].overview;
-		movie.releaseDate = res.results[0].release_date;
-		app.displayContentForm(movie);
+				$.when(getSingleAlbum)
+					.then(function(albumObject){
+						var trackIdsArray = [];
+						albumObject.items.forEach(function(track){
+							trackIdsArray.push(track.uri);
+						});
+						movie.uris = trackIdsArray;
+						app.displayContentForm(movie);
+				});
+			});
 	});
 }
 
-app.displayContentForm = function(){
+app.getMovieFromForm = function(movieName){
+ 	return $.ajax({
+ 		url: movieBaseApiUrl + '/search/movie',
+ 		method: 'GET',
+ 		dataType: 'JSON',
+ 		data: {
+ 			api_key: movieApiKey,
+ 			language: 'en-US',
+ 			query: movieName
+ 		}
+ 	});
+ }
+
+app.displayContentForm = function(movie){
 	var dataTemplate = $('#data').html();
 	var compileDataTemplate = Handlebars.compile(dataTemplate);
 	var finalDataTemplate = compileDataTemplate(movie);
@@ -159,7 +179,7 @@ app.displayContentForm = function(){
 }
 
 app.tilt = function() {
-	$(".test").tiltedpage_scroll({
+	$("ul").tiltedpage_scroll({
 	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
 	  angle: 50,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
 	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
