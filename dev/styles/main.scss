@@ -1,0 +1,70 @@
+
+// @import "partials/header";
+
+
+/*
+HEADING FONT: font-family: 'Montserrat', sans-serif;
+BODY FONT:    font-family: 'Open Sans', sans-serif;
+*/
+
+// Brand Colours
+
+$VeryDarkGreyishBlue: #556270;
+$ModerateCyan: #4ecdc4;
+$SoftGreen: #c7f464;
+$VerySoftBlue: #a8c0db;
+
+body {
+  margin: 0;
+}
+
+header {
+  background: linear-gradient(0deg,rgba(85, 98, 112, .85),rgba(85, 98, 112, .5)), url(../../images/background2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -60%);
+    p {
+      text-align: center;
+      font-size: 20px;
+      text-transform: uppercase;
+      color: $SoftGreen;
+    }
+}
+
+h1 {
+	font-size:175px;
+  text-align:center;
+  font-weight:bold;
+  display:block;
+  margin:0px;
+  line-height:1em;
+}
+
+.three-dee {
+  color:#556270;
+  text-shadow: 10px 6px rgba(#4ecdc4,0.8), -10px 3px rgba(#c7f464,0.8); 
+  letter-spacing:2px;
+}
+
+footer {
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+    .footer {
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+    }
+}

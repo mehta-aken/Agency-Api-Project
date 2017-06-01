@@ -3,32 +3,53 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Project5</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400|Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="public/styles/style.css">
+	<title>TrackFlix</title>
 </head>
 <body>
-	<form>
-		<label for="movie-name">Movie Name</label>
-		<input id="movie-name" type="text">
-		<input type="submit">
-	</form>
-	<ul style="list-style-type: none;"></ul>
+	<header>
+		<div class="header">
+			<h1 class="three-dee">TrackFlix</h1>
+			<p>Today's Top 5 Movies</p>
+			<p>And something about songs</p>
+		</div>
+		<script id="data" type="text/x-handlebars-template">
+			<li class="container" id="{{id}}">
+				<div class="movie">
+					<h2>{{title}}</h2>
+					<img src="{{image}}" alt="movie-poster" style="width: 200px;">
+					<p>{{overview}}</p>
+					<p>Release Date: {{releaseDate}}</p>
+				</div>	
+				<div class="songs">
+					{{#each uris}}
+					<iframe src="https://open.spotify.com/embed?uri={{this}}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+					{{/each}}
+				
+				</div>
+			</li>
+		</script>
+	</header>
 
-	<script id="data" type="text/x-handlebars-template">
-		<li class="container" id="{{id}}">
-			<div class="movie">
-				<h2>{{title}}</h2>
-				<img src="{{image}}" alt="movie-poster" style="width: 200px;">
-				<p>{{overview}}</p>
-				<p>Release Date: {{releaseDate}}</p>
-			</div>	
-			<div class="songs">
-				{{#each uris}}
-				<iframe src="https://open.spotify.com/embed?uri={{this}}" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
-				{{/each}}
-			
+		<form> <!-- SEARCH -->
+			<label for="movie-name">Movie Name</label>
+			<input id="movie-name" type="text">
+			<input type="submit">
+		</form>
+		<ul style="list-style-type: none;"></ul>
+
+		<footer>
+			<div class="footer f-top">
+				<p>&copy; <a href="https://twitter.com/akenmehta" target="_blank">Aken</a> & <a href="https://twitter.com/h1tonytruong" target="_blank">Tony</a> & <a href="https://twitter.com/LOCnCode" target="_blank">Laurie</a></p>
 			</div>
-		</li>
-	</script>
+			<div class="footer f-bottom">
+				<a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Check%20out%20TrackFlix!" data-size="large"><i class="fa fa-twitter-square" aria-hidden="true"></i></a> 
+			</div>
+		</footer>
+
+		
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 	<script src="public/scripts/main.js"></script>
