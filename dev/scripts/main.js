@@ -1,13 +1,12 @@
-app = {};
-
+var app = {};
+app.moviesArray = [];
+app.albumPromises = [];
+app.trackPromises = [];
 const movieApiKey = 'f012df5d63927931e82fe659a8aaa3ac';
 const movieBaseApiUrl = 'https://api.themoviedb.org/3';
-const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500'
-
-// Client ID
-// 94ccc199dc00419984e594823bdaf014
-// Client Secret
-// fc1ec85e92ab4671ba3c965bf27ca937
+const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+const albumBaseUrl = 'https://api.spotify.com/v1/';
+const albumToken = 'Bearer BQBYcgBGPN_WQuKf2vxtnJWD5D6bKaQNtv8_LH1D7JdfjcAkgA1qsqtZfHPWi1ag663ETe5VWzR1q7xkhF1qwOkzEorcZ034GXFurMMXSryT6nfxP87gVbhvw96ec0Y7GAVPJat2sZB55WurdW43vDZbj_Qm';
 
 // document ready function
 $(function(){
@@ -17,7 +16,7 @@ $(function(){
 // functions fired on page load
 app.init = function(){
 	app.getMoviesData();
-	app.form();
+	// app.form();
 }
 
 // getting data from moviebd api
@@ -40,32 +39,95 @@ app.getMoviesData = function(){
 app.getPopularMovies = function(movies){
 	for(var i = 0; i < 5; i++){
 		var movie = {};
+		movie.id = i;
 		movie.title = movies[i].title;
 		movie.image = movieImageBaseUrl + movies[i].poster_path;
 		movie.overview = movies[i].overview;
 		movie.releaseDate = movies[i].release_date;
-		
-		app.displayContent(movie);
+
+		app.albumPromises.push(app.getAlbumData(movie.title));
+		app.moviesArray.push(movie);
 	}
+	
+	$.when(...app.albumPromises)
+		.done(function(...results) {
+			results.forEach(function(result) {
+				const albumId = result[0].albums.items[0].id;
+				app.trackPromises.push(app.getTracksByAlbumId(albumId));
+			});
+			app.getTracks(app.trackPromises);
+		});
 }
 
+// at this point we have made a request for all of the tracks associated with each album and we are waiting for them to come back
+app.getTracks = function(promises) {
+	$.when(...promises)
+	// when the .done fires, we now have all of our tracks associated with each one of our albums
+		.done(function(...tracklists) {
+			// we loop over each one of our track lists that correspond to each one of our movies
+			tracklists.forEach(function(albumTracks, index) {
+				// because the number of albums and the number of movies are identical in length and in the same order we can use their indexes to match them up to each other
+				app.moviesArray[index].uris = [];
+				// here we ^^ create an empty array to store the uris in once we grab them from each tracklist
+				// we loop over each track individually to grab its uri
+				albumTracks[0].items.forEach(function(item) {
+					// we push each individual track's uri into the uri list that corresponds with each individual movie, using the index in order to match up the uri to its corresponding uri array in its corresponding movie
+					app.moviesArray[index].uris.push(item.uri);
+				});
+				app.pushToHandleBars(app.moviesArray[index]);
+			});
+			// finally what we end up with is an array that contains five objects. each object represents one movie. each movie has a uris property which is an array, and this array contains three spotify ids that correspond to the three tracks that are most popular for that particular movie
+		});
+	
+}
+
+app.getAlbumData = function(movieName){
+	return $.ajax({
+		url: albumBaseUrl + 'search/',
+		method: 'GET',
+		headers: {
+			Authorization: albumToken
+		},
+		data: {
+			q: movieName,
+			type: 'album',
+			limit: 1
+		}
+	});
+}
+
+app.getTracksByAlbumId = function(id) {
+	return $.ajax({
+		url: albumBaseUrl + `albums/${id}/tracks`,
+		method: 'GET',
+		headers: {
+			Authorization: albumToken
+		},
+		data: {
+			limit: 3
+		}
+	});
+}
 // connects to handlebars and display movie info on the html
-app.displayContent = function(movie){
+
+app.pushToHandleBars = function(data){
 	var dataTemplate = $('#data').html();
 	var compileDataTemplate = Handlebars.compile(dataTemplate);
-	var finalDataTemplate = compileDataTemplate(movie);
-
+	var finalDataTemplate = compileDataTemplate(data);
 	$('ul').append(finalDataTemplate);
 }
 
-app.form = function(){
-	$('form').on('submit', function(e){
-		e.preventDefault();
-		var movieName = $('#movie-name').val();
-		$('#movie-name').val('');
-		app.getMovieFromForm(movieName);
-	});
-}
+// app.form = function(){
+// 	$('form').on('submit', function(e){
+// 		e.preventDefault();
+// 		var movieName = $('#movie-name').val();
+// 		$('#movie-name').val('');
+
+// 		console.log(movieName);
+// 		app.getMovieFromForm(movieName);
+// 		app.getAlbumData(movieName);
+// 	});
+// }
 
 app.getMovieFromForm = function(movieName){
 	$.ajax({
@@ -84,11 +146,11 @@ app.getMovieFromForm = function(movieName){
 		movie.image = movieImageBaseUrl + res.results[0].poster_path;
 		movie.overview = res.results[0].overview;
 		movie.releaseDate = res.results[0].release_date;
-		console.log(movie);
 		app.displayContentForm(movie);
 	});
 }
-app.displayContentForm = function(movie){
+
+app.displayContentForm = function(){
 	var dataTemplate = $('#data').html();
 	var compileDataTemplate = Handlebars.compile(dataTemplate);
 	var finalDataTemplate = compileDataTemplate(movie);
