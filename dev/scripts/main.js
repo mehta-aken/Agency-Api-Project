@@ -7,20 +7,28 @@ const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
 
-const albumToken = 'Bearer BQCmwTa0KCuaViq1fUsqSmAzbSCUxx2Q8RaRc2xbQh7iiyBN-ekJcZN0SYiTHiPpnz26CZQhD85-W3CCGfq5XuOFrfde4FIB0RyylElhdhbCtFTHHs0Juswcbb0f7tv79pB7rTiZXB6eXb_-vSv5e72U16QL';
-
+const albumToken = 'Bearer BQA50wwUNV0lFzEPpLTrG9_Co_Xrw8oPxFrS6_tHQ5sgLza9ERGJHOc3PLXCt8YLkq166u1GKDiQAP32kp1pt0Ym7rRC-s-snsg0s9lAfiZlnWa37Ssh2HvExaZkesiXxFFJvCtzLHI';
 
 
 
 // document ready function
 $(function(){
 	app.init();
+	// $('.navbar-wrapper').stickUp();
 });
+
+jQuery(function($) {
+                $(document).ready( function() {
+                  //enabling stickUp on the '.navbar-wrapper' class
+                  $('.navbar-wrapper').stickUp();
+                });
+              });
 
 // functions fired on page load
 app.init = function(){
 	app.getMoviesData();
 	app.form();
+
 }
 
 // getting data from moviebd api
@@ -139,6 +147,8 @@ app.form = function(){
 				movie.overview = movies.overview;
 				movie.releaseDate = movies.release_date;
 			});
+
+
 			
 		$.when(albumIdPromise)
 			.then(function(album){
@@ -188,3 +198,4 @@ app.tilt = function() {
 	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
 	});
 }
+
