@@ -153,18 +153,25 @@ app.form = function(){
 		$.when(albumIdPromise)
 			.then(function(album){
 				var albumId = album.albums.items[0].id;
-				var getSingleAlbum = app.getTracksByAlbumId(albumId);
 
-				$.when(getSingleAlbum)
-					.then(function(albumObject){
-						var trackIdsArray = [];
-						albumObject.items.forEach(function(track){
-							trackIdsArray.push(track.uri);
-						});
-						movie.uris = trackIdsArray;
-						app.displayContentForm(movie);
-						app.tilt();
-				});
+				if(albumId === undefined || movieName !==' '){
+					alert('Please enter another movie name... ');
+				}
+				else{
+					var getSingleAlbum = app.getTracksByAlbumId(albumId);
+
+					$.when(getSingleAlbum)
+						.then(function(albumObject){
+							var trackIdsArray = [];
+							albumObject.items.forEach(function(track){
+								trackIdsArray.push(track.uri);
+							});
+							movie.uris = trackIdsArray;
+							app.displayContentForm(movie);
+							app.tilt();
+					});
+					
+				}
 			});
 	});
 }
