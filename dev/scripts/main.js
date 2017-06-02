@@ -9,8 +9,6 @@ const albumBaseUrl = 'https://api.spotify.com/v1/';
 
 const albumToken = 'Bearer BQBcAZ3ExyFKPCaZwc-H7jnnVh077C8mzar30p7x6-Xtr8NA6F-CusqpDLhGlzEs0hlEkHEpOjdnYqThd0ExRY8yFWtiqKhemVF_sk-IKXQjr2puoH49dysYvw5tgdQZww1MrI-gs7yU2u22EhlFPuWAKo3y';
 
-
-
 // document ready function
 $(function(){
 	app.init();
@@ -151,12 +149,22 @@ app.form = function(){
 		$.when(albumIdPromise)
 			.then(function(album){
 				var albumId = album.albums.items[0].id;
+<<<<<<< HEAD
 				console.log(albumId);
 				if(albumId === undefined || movieName !== ' '){
 					alert('Please enter another movie name...');
 				}
 				else{
 					var getSingleAlbum = app.getTracksByAlbumId(albumId);
+=======
+
+				if(albumId === undefined || movieName !==' '){
+					alert('Please enter another movie name... ');
+				}
+				else{
+					var getSingleAlbum = app.getTracksByAlbumId(albumId);
+
+>>>>>>> b7e4e0b27185eb3020a35c5e3ea6246bb0e4565c
 					$.when(getSingleAlbum)
 						.then(function(albumObject){
 							var trackIdsArray = [];
@@ -165,7 +173,13 @@ app.form = function(){
 							});
 							movie.uris = trackIdsArray;
 							app.displayContentForm(movie);
+<<<<<<< HEAD
 					});
+=======
+							app.tilt();
+					});
+					
+>>>>>>> b7e4e0b27185eb3020a35c5e3ea6246bb0e4565c
 				}
 			});
 	});
