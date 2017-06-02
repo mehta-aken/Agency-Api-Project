@@ -102,9 +102,7 @@ function($) {
 				}, 10);
 				$('.stuckMenu').css("position","fixed");
 				$('.isStuck').css({
-					top: '0px', 
-					transform: 'translate(-50%)', 
-					left: '50%'
+					top: '0px'
 				}, 10, function(){
 
 				});
