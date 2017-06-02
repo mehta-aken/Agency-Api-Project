@@ -7,8 +7,7 @@ const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
 
-const albumToken = 'Bearer BQAv_yxekA3pxBBUH5iC2ea2EvzEDUIiqUqCP1wDlVRmKhtgE7gG9kfDsSIgV637FIctp9oDMmQjMH7tJMjQSPwcq0uUIepCPxtD8X-0xeqKkvpHCtIp8kZxBu8VA7Nls4kdAPrLkoE';
-
+const albumToken = 'Bearer BQAK7mdH7hheUlGv-EbxK_O4BySBtd9tjGh7HhB4wO9sSQL-cWxdMncBSMmvXiKLs8RusYYDpBoYClKNsi8kEF-rstd7VUsWvnNnMRhxcPFrDKM2wm8_Ro67jqk8Vng2E4UMrwDLObM';
 
 
 // document ready function
@@ -133,7 +132,6 @@ app.form = function(){
 	$('form').on('submit', function(e){
 		e.preventDefault();
 		var movieName = $('#movie-name').val();
-		$('#movie-name').val('');
 		var movie = {};
 		var getMoviesDataPromise = app.getMovieFromForm(movieName);
 		var albumIdPromise = app.getAlbumData(movieName);
@@ -148,18 +146,15 @@ app.form = function(){
 				movie.releaseDate = movies.release_date;
 			});
 
-
-			
 		$.when(albumIdPromise)
 			.then(function(album){
 				var albumId = album.albums.items[0].id;
 
-				if(albumId === undefined || movieName !==' '){
+				if(movieName === null || movieName === ''){
 					alert('Please enter another movie name... ');
 				}
 				else{
 					var getSingleAlbum = app.getTracksByAlbumId(albumId);
-
 					$.when(getSingleAlbum)
 						.then(function(albumObject){
 							var trackIdsArray = [];
@@ -170,9 +165,9 @@ app.form = function(){
 							app.displayContentForm(movie);
 							app.tilt();
 					});
-					
 				}
 			});
+		$('#movie-name').val('');
 	});
 }
 
@@ -198,12 +193,15 @@ app.displayContentForm = function(movie){
 }
 
 app.tilt = function() {
-	$("ul").tiltedpage_scroll({
-	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
-	  angle: 20,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
-	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
-	  scale: false,                       // You can toggle the scaling effect here as well. The default value is true.
-	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
-	});
+
+	if ($(window).width() > 760){
+		$("ul").tiltedpage_scroll({
+		  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
+		  angle: 20,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
+		  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
+		  scale: false,                       // You can toggle the scaling effect here as well. The default value is true.
+		  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
+		});
+	}
 }
 

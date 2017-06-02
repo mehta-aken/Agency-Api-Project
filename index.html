@@ -23,14 +23,14 @@
 			<li class="container clearfix" id="{{id}}" clearfix>
 		 		<h2>{{title}}</h2>  
 	 			<div class="left">
-	 				<img src="{{image}}" alt="movie-poster" style="width: 200px;">
+	 				<img src="{{image}}" alt="movie-poster">
 	 				<p>Release Date: {{releaseDate}}</p>
 	 			</div>
 	 			<div class="right">
 	 				<p class="overview">{{overview}}</p>
 					<div class="spotify">
 						{{#each uris}}
-						<iframe class="iframe" src="https://open.spotify.com/embed?uri={{this}}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
+						<iframe class="iframe" src="https://open.spotify.com/embed?uri={{this}}" width="100%" height="75" frameborder="0" allowtransparency="true"></iframe>
 						{{/each}}
 					</div>
 	 			</div>
@@ -50,7 +50,8 @@
 				<button input type="submit">Submit</button>
 			</div>
 		</form>
-		<ul style="list-style-type: none;"></ul>
+
+		<ul></ul>
 
 
 		<footer>
