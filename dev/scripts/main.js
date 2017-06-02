@@ -131,7 +131,6 @@ app.form = function(){
 	$('form').on('submit', function(e){
 		e.preventDefault();
 		var movieName = $('#movie-name').val();
-		$('#movie-name').val('');
 		var movie = {};
 		var getMoviesDataPromise = app.getMovieFromForm(movieName);
 		var albumIdPromise = app.getAlbumData(movieName);
@@ -149,22 +148,12 @@ app.form = function(){
 		$.when(albumIdPromise)
 			.then(function(album){
 				var albumId = album.albums.items[0].id;
-<<<<<<< HEAD
-				console.log(albumId);
-				if(albumId === undefined || movieName !== ' '){
-					alert('Please enter another movie name...');
-				}
-				else{
-					var getSingleAlbum = app.getTracksByAlbumId(albumId);
-=======
 
-				if(albumId === undefined || movieName !==' '){
+				if(movieName === null || movieName === ''){
 					alert('Please enter another movie name... ');
 				}
 				else{
 					var getSingleAlbum = app.getTracksByAlbumId(albumId);
-
->>>>>>> b7e4e0b27185eb3020a35c5e3ea6246bb0e4565c
 					$.when(getSingleAlbum)
 						.then(function(albumObject){
 							var trackIdsArray = [];
@@ -173,15 +162,11 @@ app.form = function(){
 							});
 							movie.uris = trackIdsArray;
 							app.displayContentForm(movie);
-<<<<<<< HEAD
-					});
-=======
 							app.tilt();
 					});
-					
->>>>>>> b7e4e0b27185eb3020a35c5e3ea6246bb0e4565c
 				}
 			});
+		$('#movie-name').val('');
 	});
 }
 
