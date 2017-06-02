@@ -101,17 +101,18 @@ function($) {
 					'margin-top': stickyHeight + stickyMarginB + currentMarginT + 'px'
 				}, 10);
 				$('.stuckMenu').css("position","fixed");
-				$('.isStuck').css({
-					top: '0px', 
-					transform: 'translate(-50%)', 
-					left: '50%'
-				}, 10, function(){
+				// $('.isStuck').css({
+				// 	top: '0px', 
+				// 	transform: 'translate(-50%)', 
+				// 	left: '50%'
+				// }, 10, function(){
 
-				});
+				// });
 			};
 
 			if(varscroll + topMargin < vartop){
-				$('.stuckMenu').removeClass('isStuck');
+				// $('.stuckMenu').removeClass('isStuck');
+				$('form').removeClass('stuckMenu');
 				$('.stuckMenu').next().closest('div').css({
 					'margin-top': currentMarginT + 'px'
 				}, 10);
