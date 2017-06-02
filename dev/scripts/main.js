@@ -11,16 +11,24 @@ const albumToken = 'Bearer BQBJbmANpZOvMmJrDMZ9hf6LTiVJKw7QZZpzRvMSYVDiNnJohTlH0
 
 
 
-
 // document ready function
 $(function(){
 	app.init();
+	// $('.navbar-wrapper').stickUp();
 });
+
+jQuery(function($) {
+                $(document).ready( function() {
+                  //enabling stickUp on the '.navbar-wrapper' class
+                  $('.navbar-wrapper').stickUp();
+                });
+              });
 
 // functions fired on page load
 app.init = function(){
 	app.getMoviesData();
 	app.form();
+
 }
 
 // getting data from moviebd api
@@ -139,6 +147,8 @@ app.form = function(){
 				movie.overview = movies.overview;
 				movie.releaseDate = movies.release_date;
 			});
+
+
 			
 		$.when(albumIdPromise)
 			.then(function(album){
@@ -188,3 +198,4 @@ app.tilt = function() {
 	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
 	});
 }
+
