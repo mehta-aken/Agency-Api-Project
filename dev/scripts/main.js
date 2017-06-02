@@ -7,9 +7,7 @@ const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
 
-const albumToken = 'Bearer BQDGhZwHyIAH-rpWF_We3xtA1CydNVCI5gARAljn7IzDzlPXHu8zXW0t9GwnypTMspHkL-yPeiAtLkHEOi_dT5_km21-STziLCRH7aJiQ9lWisbTMSa4dt2wttHM7wJGunhUCMPgCrI';
-
-
+const albumToken = 'Bearer BQBcAZ3ExyFKPCaZwc-H7jnnVh077C8mzar30p7x6-Xtr8NA6F-CusqpDLhGlzEs0hlEkHEpOjdnYqThd0ExRY8yFWtiqKhemVF_sk-IKXQjr2puoH49dysYvw5tgdQZww1MrI-gs7yU2u22EhlFPuWAKo3y';
 
 // document ready function
 $(function(){
@@ -133,7 +131,6 @@ app.form = function(){
 	$('form').on('submit', function(e){
 		e.preventDefault();
 		var movieName = $('#movie-name').val();
-		$('#movie-name').val('');
 		var movie = {};
 		var getMoviesDataPromise = app.getMovieFromForm(movieName);
 		var albumIdPromise = app.getAlbumData(movieName);
@@ -148,18 +145,15 @@ app.form = function(){
 				movie.releaseDate = movies.release_date;
 			});
 
-
-			
 		$.when(albumIdPromise)
 			.then(function(album){
 				var albumId = album.albums.items[0].id;
 
-				if(albumId === undefined || movieName !==' '){
+				if(movieName === null || movieName === ''){
 					alert('Please enter another movie name... ');
 				}
 				else{
 					var getSingleAlbum = app.getTracksByAlbumId(albumId);
-
 					$.when(getSingleAlbum)
 						.then(function(albumObject){
 							var trackIdsArray = [];
@@ -170,9 +164,9 @@ app.form = function(){
 							app.displayContentForm(movie);
 							app.tilt();
 					});
-					
 				}
 			});
+		$('#movie-name').val('');
 	});
 }
 
