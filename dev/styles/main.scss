@@ -88,7 +88,7 @@ ul{
     h2 {
       float: left;
       width: 100%;
-      background-color: lightblue;
+      // background-color: lightblue;
     }
 
     .left{
@@ -96,7 +96,7 @@ ul{
       height: 100%;
       width: 35%;
       margin-right: 1%;
-      background-color: lightpink;
+      // background-color: lightpink;
         img{
           display: block;
           margin: 10% auto;
@@ -104,7 +104,7 @@ ul{
 
         p{
           text-align: center;
-          background-color: lightpink;
+          // background-color: lightpink;
         }
     }
 
@@ -112,7 +112,7 @@ ul{
       float: left;
       width: 63%;
       height: 100%;
-      background-color: lightpink;
+      // background-color: lightpink;
 
         .overview{
           text-align: left;
@@ -126,7 +126,7 @@ ul{
   } 
 
   .tps-wrapper{
-    background: lightgreen;
+    background: $VerySoftBlue;
     border: 1px black solid;
     padding: 2%;
   }
@@ -169,6 +169,8 @@ form {
 }
 
 .isStuck {
-  transform: translate(-50%);
+  transform: translateX(-50%);
   left: 50%;
 }
+
+
