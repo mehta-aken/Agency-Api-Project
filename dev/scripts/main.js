@@ -17,6 +17,13 @@ $(function(){
 	// $('.navbar-wrapper').stickUp();
 });
 
+// jQuery(function($) {
+//                 $(document).ready( function() {
+//                   //enabling stickUp on the '.navbar-wrapper' class
+//                   $('.navbar-wrapper').stickUp();
+//                 });
+//               });
+
 // functions fired on page load
 app.init = function(){
 	app.getMoviesData();
