@@ -7,19 +7,21 @@ const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
 
-const albumToken = 'Bearer BQDE6EWEnloTZw8XDGN1_mup3ZrQqTMeMs2IHwvBOdJLuKtTh8V4VK81E396_ylaPZSSJbgFaF70lgWTWotvJ-3SdVjUTkIhJHIhQVNPIwlR3tk6rZ1vm4V3mhhQ7kCB-N7-2wnRw2A';
+const albumToken = 'Bearer BQAnN26IWxfwFK4KRTXXDTBoUsRT7sHmaxDikKzcG14Xb8Zxx0wP1EnICTYewnSdztXzAK9Fdh9IyxKZqcsCqDge7KbIoo7pQ9fHNrORgWA5rAmls1RSWjZkXxSM8PVLXUIYbcEzewc';
 
 
 
 // document ready function
 $(function(){
 	app.init();
+	// $('.navbar-wrapper').stickUp();
 });
 
 // functions fired on page load
 app.init = function(){
 	app.getMoviesData();
 	app.form();
+
 }
 
 // getting data from moviebd api
@@ -138,6 +140,8 @@ app.form = function(){
 				movie.overview = movies.overview;
 				movie.releaseDate = movies.release_date;
 			});
+
+
 			
 		$.when(albumIdPromise)
 			.then(function(album){
@@ -180,10 +184,11 @@ app.displayContentForm = function(movie){
 
 app.tilt = function() {
 	$("ul").tiltedpage_scroll({
-	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
+	  sectionContainer: "container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
 	  angle: 50,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
 	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
 	  scale: true,                       // You can toggle the scaling effect here as well. The default value is true.
 	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
 	});
 }
+

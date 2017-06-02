@@ -1,0 +1,174 @@
+
+
+
+
+// /*
+// HEADING FONT: font-family: 'Montserrat', sans-serif;
+// BODY FONT:    font-family: 'Open Sans', sans-serif;
+// */
+
+// // Brand Colours
+
+// $VeryDarkGreyishBlue: #556270;
+// $ModerateCyan: #4ecdc4;
+// $SoftGreen: #c7f464;
+// $VerySoftBlue: #a8c0db;
+
+// body {
+//   margin: 0;
+//   background: linear-gradient(0deg,rgba(85, 98, 112, .85),rgba(85, 98, 112, .5)), url(../../images/background2.jpg);
+//   background-attachment: fixed;
+// }
+
+// header {
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   height: 100vh;
+//   position: relative;
+//   margin: 0;
+//   font-family: 'Montserrat', sans-serif;
+// }
+
+// .header {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   margin-right: -50%;
+//   transform: translate(-50%, -60%);
+//     p {
+//       text-align: center;
+//       font-size: 20px;
+//       text-transform: uppercase;
+//       color: $SoftGreen;
+//     }
+// }
+
+// h1 {
+// 	font-size:175px;
+//   text-align:center;
+//   font-weight:bold;
+//   display:block;
+//   margin:0px;
+//   line-height:1em;
+// }
+
+// .three-dee {
+//   color:#556270;
+//   text-shadow: 10px 6px rgba(#4ecdc4,0.8), -10px 3px rgba(#c7f464,0.8); 
+//   letter-spacing:2px;
+// }
+
+// footer {
+//   clear: both;
+//   width: 100%;
+//   font-family: 'Open Sans', sans-serif;
+//   text-transform: uppercase;
+//     .footer {
+//       text-align: center;
+//     }
+//     a {
+//       text-decoration: none;
+//     }
+// }
+
+
+// //MAIN CONTENT
+
+// ul{ 
+//   // background-color: lightgreen;
+//   padding: 0;
+//   width: 65%;
+//   margin: 0 auto;
+// }
+
+// .container{ //this is the li
+//   text-align: center;  
+//   height: 500px;
+    
+//     h2 {
+//       float: left;
+//       width: 100%;
+//       background-color: lightblue;
+//     }
+
+//     .left{
+//       float: left;
+//       height: 100%;
+//       width: 35%;
+//       margin-right: 1%;
+//       background-color: lightpink;
+//         img{
+//           display: block;
+//           margin: 10% auto;
+//         }
+
+//         p{
+//           text-align: center;
+//           background-color: lightpink;
+//         }
+//     }
+
+//     .right{
+//       float: left;
+//       width: 63%;
+//       height: 100%;
+//       background-color: lightpink;
+
+//         .overview{
+//           text-align: left;
+//         }
+//     }
+
+//     .spotify{
+//       float: left;
+//       width: 100%;
+//     }
+//   } 
+
+//   .tps-wrapper{
+//     background: lightgreen;
+//     border: 1px black solid;
+//     padding: 2%;
+//   }
+
+// //MAIN CONTENT ENDS
+
+// //SEARCH BAR
+
+// form {  
+//   width: 65%;
+//   text-align: center;
+//   margin: 0 auto;
+//   margin-bottom: 20px;
+//   padding: 1%;
+//   background-color: $VeryDarkGreyishBlue;
+//   font-size: 18px;
+//   color: $SoftGreen;
+//   font-family: 'Open Sans', sans-serif;
+//   text-transform: uppercase;
+//   box-shadow: 7px 12px rgba(#4ecdc4,0.8), -9px 8px rgba(#c7f464,0.8); 
+
+//     .search-items {
+//       display: inline-block;
+//       width: 30.33%;
+//     }
+
+//     button {
+//       color: $SoftGreen;
+//       cursor: pointer;
+//       padding: 1% 10%;
+//       font-size: 14px;
+//       border: none;
+//       background-color: transparent;
+//       font-family: 'Open Sans', sans-serif;
+//       text-transform: uppercase;      
+//     }
+//     button:hover {
+//       background-color: $VerySoftBlue;
+//     }
+// }
+
+// .isStuck {
+//   transform: translate(-50%);
+//   left: 50%;
+// }
