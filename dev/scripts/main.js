@@ -6,7 +6,6 @@ const movieApiKey = 'f012df5d63927931e82fe659a8aaa3ac';
 const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
-
 const albumToken = 'Bearer BQAMTGosIiMmtlrUSmKRXuLsrkZYCTWg6SQvX5yT1KEgb5WOpWrxKeU-nQNcJswy5xC25cgGhZUMdO-ICP7E6bwv1HASAWOAU6jmmfxUWOQK99GDczlYw-MP-WE9TUaunwl9LGIDQOR4Xa5zgGXpXCxlPqPu';
 
 // document ready function
@@ -192,12 +191,15 @@ app.displayContentForm = function(movie){
 }
 
 app.tilt = function() {
-	$("ul").tiltedpage_scroll({
-	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
-	  angle: 20,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
-	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
-	  scale: false,                       // You can toggle the scaling effect here as well. The default value is true.
-	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
-	});
+
+	if ($(window).width() > 760){
+		$("ul").tiltedpage_scroll({
+		  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
+		  angle: 20,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
+		  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
+		  scale: false,                       // You can toggle the scaling effect here as well. The default value is true.
+		  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
+		});
+	}
 }
 
