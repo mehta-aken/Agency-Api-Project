@@ -38,7 +38,7 @@ header {
   transform: translate(-50%, -60%);
     p {
       text-align: center;
-      font-size: 20px;
+      font-size: 22px;
       text-transform: uppercase;
       color: $SoftGreen;
     }
@@ -79,9 +79,11 @@ footer {
 ul{ 
   // background-color: lightgreen;
   padding: 0;
-  width: 65%;
-  margin: 10% auto;
+  max-width: 65%;
+  margin: 5% auto;
+  list-style-type: none;
 }
+
 
 .container{ //this is the li
   text-align: center;
@@ -103,6 +105,7 @@ ul{
         img{
           display: block;
           margin: 10% auto;
+          width: 200px;
         }
 
         p{
@@ -119,6 +122,8 @@ ul{
 
         .overview{
           text-align: left;
+          text-overflow: ellipsis;
+
         }
     }
 
@@ -126,6 +131,7 @@ ul{
       float: left;
       width: 100%;
     }
+
   } 
 
   .tps-wrapper,{
@@ -148,7 +154,8 @@ form {
   color: $SoftGreen;
   font-family: 'Open Sans', sans-serif;
   text-transform: uppercase;
-  box-shadow: 7px 12px rgba(#4ecdc4,0.8), -9px 8px rgba(#c7f464,0.8); 
+  box-shadow: 7px 12px rgba(#4ecdc4,0.8), -9px 8px rgba(#c7f464,0.8);
+  z-index: 1;
 
     .search-items {
       display: inline-block;
@@ -206,3 +213,93 @@ footer{
   left: 50%;
 }
 
+
+
+
+
+
+
+
+
+@media (max-width: 1175px){
+   form{
+    width: 90%;
+   }
+   ul{
+    max-width: 90%; 
+  }
+}
+
+@media (max-width: 760px){
+  .container .overview, .left p{
+    display: none;
+  }
+  .container h2{
+    font-size: 24px;
+  }
+  .container .left{
+    width: 40%;
+  }
+  .container .right{
+    width: 60%;
+  }
+  .container .left img{
+    width: 200px;
+  }
+  .container .spotify{
+    // border: 1px black solid;
+    margin-top: 28px;
+    iframe{
+      width: 90%;
+      height: 100px;
+    }
+  }
+}
+
+
+@media (max-width: 840px){
+  h1{
+    font-size: 100px;
+  }
+  .header p{
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 575px){
+  .container .left{
+    display: none;
+  }
+  .container .right{
+    width: 100%;
+    .iframe{
+      width: 100%;
+    }
+  }
+}
+
+
+@media (max-width: 480px){
+  h1{
+    font-size: 70px;
+  }
+  .three-dee {
+    color: $SoftGreen;
+    text-shadow: none; 
+    letter-spacing:2px;
+  }
+  form{
+    text-align: none;
+    margin: 0;
+  }
+  form .search-items{
+    width: 75%;
+  }
+  form [for="movie-name"]{
+    display: none;
+  }
+  form button{
+    margin-top: 4%;
+    padding: 2%;
+  }
+}

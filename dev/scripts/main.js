@@ -7,7 +7,8 @@ const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
 
-const albumToken = 'Bearer BQBcAZ3ExyFKPCaZwc-H7jnnVh077C8mzar30p7x6-Xtr8NA6F-CusqpDLhGlzEs0hlEkHEpOjdnYqThd0ExRY8yFWtiqKhemVF_sk-IKXQjr2puoH49dysYvw5tgdQZww1MrI-gs7yU2u22EhlFPuWAKo3y';
+const albumToken = 'Bearer BQAK7mdH7hheUlGv-EbxK_O4BySBtd9tjGh7HhB4wO9sSQL-cWxdMncBSMmvXiKLs8RusYYDpBoYClKNsi8kEF-rstd7VUsWvnNnMRhxcPFrDKM2wm8_Ro67jqk8Vng2E4UMrwDLObM';
+
 
 // document ready function
 $(function(){
@@ -192,12 +193,15 @@ app.displayContentForm = function(movie){
 }
 
 app.tilt = function() {
-	$("ul").tiltedpage_scroll({
-	  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
-	  angle: 20,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
-	  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
-	  scale: false,                       // You can toggle the scaling effect here as well. The default value is true.
-	  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
-	});
+
+	if ($(window).width() > 760){
+		$("ul").tiltedpage_scroll({
+		  sectionContainer: "> .container",     // In case you don't want to use <section> tag, you can define your won CSS selector here
+		  angle: 20,                         // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
+		  opacity: true,                     // You can toggle the opacity effect with this option. The default value is true
+		  scale: false,                       // You can toggle the scaling effect here as well. The default value is true.
+		  outAnimation: true                 // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
+		});
+	}
 }
 
