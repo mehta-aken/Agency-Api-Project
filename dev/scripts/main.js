@@ -90,6 +90,7 @@ app.getTracks = function(promises) {
 		});	
 }
 
+// gets album if from the spotify
 app.getAlbumData = function(movieName){
 	return $.ajax({
 		url: albumBaseUrl + 'search/',
