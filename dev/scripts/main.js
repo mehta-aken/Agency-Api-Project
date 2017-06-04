@@ -6,9 +6,7 @@ const movieApiKey = 'f012df5d63927931e82fe659a8aaa3ac';
 const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
-
-const albumToken = 'Bearer BQAK7mdH7hheUlGv-EbxK_O4BySBtd9tjGh7HhB4wO9sSQL-cWxdMncBSMmvXiKLs8RusYYDpBoYClKNsi8kEF-rstd7VUsWvnNnMRhxcPFrDKM2wm8_Ro67jqk8Vng2E4UMrwDLObM';
-
+const albumToken = 'Bearer BQC-zjPbYD3j2qopmq8lY7bEFH6FrpzML7MKCxnkhcXeoRHkC3OMvBfcMS8k7REPMVRqw0h6SkDmIU5KAcuMOBld_2vuPgiUNrfgPTBYggisUWAFmaHbkUY-ajO5-hNhdsRJeL5ErPvn2V1iJhppebHZ7MOj';
 
 // document ready function
 $(function(){
@@ -92,6 +90,7 @@ app.getTracks = function(promises) {
 		});	
 }
 
+// gets album if from the spotify
 app.getAlbumData = function(movieName){
 	return $.ajax({
 		url: albumBaseUrl + 'search/',
@@ -119,8 +118,8 @@ app.getTracksByAlbumId = function(id) {
 		}
 	});
 }
-// connects to handlebars and display movie info on the html
 
+// connects to handlebars and display movie info on the html
 app.pushToHandleBars = function(data){
 	var dataTemplate = $('#data').html();
 	var compileDataTemplate = Handlebars.compile(dataTemplate);
@@ -138,33 +137,37 @@ app.form = function(){
 
 		$.when(getMoviesDataPromise)
 			.then(function(data){
-				var movies = data.results[0];
-				movie.id = 0;
-				movie.title = movies.title;
-				movie.image = movieImageBaseUrl + movies.poster_path;
-				movie.overview = movies.overview;
-				movie.releaseDate = movies.release_date;
-			});
-
-		$.when(albumIdPromise)
-			.then(function(album){
-				var albumId = album.albums.items[0].id;
-
-				if(movieName === null || movieName === ''){
+				if(data.total_results === 0){
 					alert('Please enter another movie name... ');
 				}
 				else{
-					var getSingleAlbum = app.getTracksByAlbumId(albumId);
-					$.when(getSingleAlbum)
-						.then(function(albumObject){
-							var trackIdsArray = [];
-							albumObject.items.forEach(function(track){
-								trackIdsArray.push(track.uri);
-							});
-							movie.uris = trackIdsArray;
-							app.displayContentForm(movie);
-							app.tilt();
-					});
+					var movies = data.results[0];
+					movie.id = 0;
+					movie.title = movies.title;
+					movie.image = movieImageBaseUrl + movies.poster_path;
+					movie.overview = movies.overview;
+					movie.releaseDate = movies.release_date;
+
+					$.when(albumIdPromise)
+						.then(function(album){
+							if(album.albums.total === 0){
+								alert('Please enter another movie name... ');
+							}
+							else{
+								var albumId = album.albums.items[0].id;
+								var getSingleAlbum = app.getTracksByAlbumId(albumId);
+								$.when(getSingleAlbum)
+									.then(function(albumObject){
+										var trackIdsArray = [];
+										albumObject.items.forEach(function(track){
+											trackIdsArray.push(track.uri);
+										});
+										movie.uris = trackIdsArray;
+										app.displayContentForm(movie);
+										app.tilt();
+								});
+							}
+						});
 				}
 			});
 		$('#movie-name').val('');
