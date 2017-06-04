@@ -88,13 +88,12 @@ ul{
 .container{ //this is the li
   text-align: center;
   color: $VerySoftBlue;
-  margin: 5% 0;
+  margin: 2% 0;
     h2 {
       float: left;
       width: 100%;
       color: $SoftGreen;
-      font-size: 30px;
-      margin-bottom: 0;
+      font-size: 25px;
     }
 
     .left{
@@ -117,8 +116,6 @@ ul{
     .right{
       float: left;
       width: 63%;
-      // height: 50%;
-      // background-color: lightpink;
 
         .overview{
           text-align: left;
@@ -130,6 +127,12 @@ ul{
     .spotify{
       float: left;
       width: 100%;
+      .iframe{
+        width: 95%;
+        &:nth-child(2){
+          margin: 0.5% 0;
+        }
+      }
     }
 
   } 
@@ -189,20 +192,20 @@ form {
 
 footer{
   // border: 1px $SoftGreen solid;
-  margin-top: 15%;
+  float: left;
+  // margin-top: 5%;
   .f-top{
     color: $SoftGreen;
     a{
       color: $SoftGreen;
-      font-size: 20px;
-      margin: 0 0.5%;
+      font-size: 30px;
     }
   }
   .f-bottom{
-    font-size: 50px;
-    margin-bottom: 1%;
+    font-size: 10px;
     a{
       color: $SoftGreen;
+      margin: 0 2%;
     }
   }
 
@@ -273,7 +276,7 @@ footer{
   .container .right{
     width: 100%;
     .iframe{
-      width: 100%;
+      width: 90%;
     }
   }
 }
@@ -281,7 +284,16 @@ footer{
 
 @media (max-width: 480px){
   h1{
-    font-size: 70px;
+    font-size: 60px;
+  }
+  h2{
+    margin-top: 10%;
+  }
+  .right{
+    border-top: 2px $ModerateCyan solid;
+    .spotify .iframe{
+      width: 90%;
+    }
   }
   .three-dee {
     color: $SoftGreen;
@@ -290,7 +302,7 @@ footer{
   }
   form{
     text-align: none;
-    margin: 0;
+    margin: 0 auto;
   }
   form .search-items{
     width: 75%;
@@ -300,6 +312,7 @@ footer{
   }
   form button{
     margin-top: 4%;
-    padding: 2%;
+    padding: 2% 5%;
+    font-size: 12px;
   }
 }
