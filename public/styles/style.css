@@ -46,7 +46,7 @@ h1 {
 .three-dee {
   color: #556270;
   text-shadow: 10px 6px rgba(78, 205, 196, 0.8), -10px 3px rgba(199, 244, 100, 0.8);
-  letter-spacing: 2px; }
+  letter-spacing: 0.1em; }
 
 footer {
   clear: both;
