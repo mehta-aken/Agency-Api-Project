@@ -6,32 +6,35 @@ const movieApiKey = 'f012df5d63927931e82fe659a8aaa3ac';
 const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
-<<<<<<< HEAD
 
-const albumToken = 'Bearer BQBonwAFOT8n2YEzH9u8XaMnAhofqE5zq3nUcivqYSztCQfj_QH5Rv-sS_mm3rP_ElJ8hs4YtjzRhRiONz9tcNChnv81_PAnFwYYUGqhYHqrp8x_D7Z3RS7u083ETaHBZyujKe5MK4Q';
-
-=======
-const albumToken = 'Bearer BQC-zjPbYD3j2qopmq8lY7bEFH6FrpzML7MKCxnkhcXeoRHkC3OMvBfcMS8k7REPMVRqw0h6SkDmIU5KAcuMOBld_2vuPgiUNrfgPTBYggisUWAFmaHbkUY-ajO5-hNhdsRJeL5ErPvn2V1iJhppebHZ7MOj';
->>>>>>> d2cf3d0654f91f9084e2eb1461f7d443cfed26d8
+const albumToken = 'Bearer BQDPZGEMqfFhq7cbu1m9l5Rq1Yye-uDfb0QJ8OK0YcMe0x27na46cwqS-gLP_q4yr0hsqpgP8AWivwfk-eSaQYkHivjhVrev2PqA2Sf3NtyL4XBTWthjk2Ic4l4pW3zcuEOXIBauudo';
 
 // document ready function
 $(function(){
 	app.init();
-	// $('.navbar-wrapper').stickUp();
 });
-
-jQuery(function($) {
-                $(document).ready( function() {
-                  //enabling stickUp on the '.navbar-wrapper' class
-                  $('.navbar-wrapper').stickUp();
-                });
-              });
 
 // functions fired on page load
 app.init = function(){
 	app.getMoviesData();
 	app.form();
 
+	jQuery(function($) {
+	$(document).ready( function() {
+		$('.navbar-wrapper').stickUp();
+		});
+	});
+
+	$('.anchor-scroll').anchorScroll({
+	   scrollSpeed: 900, // scroll speed
+	   offsetTop: 0, // offset for fixed top bars (defaults to 0)
+	   onScroll: function () { 
+	     // callback on scroll start
+	   },
+	   scrollEnd: function () { 
+	     // callback on scroll end
+	   }
+	});
 }
 
 // getting data from moviebd api
