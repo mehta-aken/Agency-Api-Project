@@ -7,7 +7,7 @@ const movieBaseApiUrl = 'https://api.themoviedb.org/3';
 const movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 const albumBaseUrl = 'https://api.spotify.com/v1/';
 
-const albumToken = 'Bearer BQDPZGEMqfFhq7cbu1m9l5Rq1Yye-uDfb0QJ8OK0YcMe0x27na46cwqS-gLP_q4yr0hsqpgP8AWivwfk-eSaQYkHivjhVrev2PqA2Sf3NtyL4XBTWthjk2Ic4l4pW3zcuEOXIBauudo';
+const albumToken = 'Bearer BQDZNdYZMaRu-RhRn2g1lb4nb0nf07c-WFSZEpTN8eenyHoS9Y0enExNFqZBm7bKGQihTydLCcswe_rb0A_q6XGssQbYWxrHFM6Eyi70Hs_Xp7BGS3dqfssypSVeCGMT1UAaJMMoqRIZs0JV-dgnibpAyXIo';
 
 // document ready function
 $(function(){

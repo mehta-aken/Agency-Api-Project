@@ -1,0 +1,227 @@
+'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var app = {};
+app.moviesArray = [];
+app.albumPromises = [];
+app.trackPromises = [];
+var movieApiKey = 'f012df5d63927931e82fe659a8aaa3ac';
+var movieBaseApiUrl = 'https://api.themoviedb.org/3';
+var movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
+var albumBaseUrl = 'https://api.spotify.com/v1/';
+
+var albumToken = 'Bearer BQDZNdYZMaRu-RhRn2g1lb4nb0nf07c-WFSZEpTN8eenyHoS9Y0enExNFqZBm7bKGQihTydLCcswe_rb0A_q6XGssQbYWxrHFM6Eyi70Hs_Xp7BGS3dqfssypSVeCGMT1UAaJMMoqRIZs0JV-dgnibpAyXIo';
+
+// document ready function
+$(function () {
+	app.init();
+});
+
+// functions fired on page load
+app.init = function () {
+	app.getMoviesData();
+	app.form();
+
+	jQuery(function ($) {
+		$(document).ready(function () {
+			$('.navbar-wrapper').stickUp();
+		});
+	});
+
+	$('.anchor-scroll').anchorScroll({
+		scrollSpeed: 900, // scroll speed
+		offsetTop: 0, // offset for fixed top bars (defaults to 0)
+		onScroll: function onScroll() {
+			// callback on scroll start
+		},
+		scrollEnd: function scrollEnd() {
+			// callback on scroll end
+		}
+	});
+};
+
+// getting data from moviebd api
+app.getMoviesData = function () {
+	$.ajax({
+		url: movieBaseApiUrl + '/movie/popular',
+		method: 'GET',
+		dataType: 'JSON',
+		data: {
+			api_key: movieApiKey,
+			language: 'en-US'
+		}
+	}).then(function (res) {
+		app.getPopularMovies(res.results);
+	});
+};
+
+// data from the moviedb api is stored in an object and sent to displayContent method 
+app.getPopularMovies = function (movies) {
+	var _$;
+
+	for (var i = 0; i < 5; i++) {
+		var movie = {};
+		movie.id = i;
+		movie.title = movies[i].title;
+		movie.image = movieImageBaseUrl + movies[i].poster_path;
+		movie.overview = movies[i].overview;
+		movie.releaseDate = movies[i].release_date;
+
+		app.albumPromises.push(app.getAlbumData(movie.title));
+		app.moviesArray.push(movie);
+	}
+
+	(_$ = $).when.apply(_$, _toConsumableArray(app.albumPromises)).done(function () {
+		for (var _len = arguments.length, results = Array(_len), _key = 0; _key < _len; _key++) {
+			results[_key] = arguments[_key];
+		}
+
+		results.forEach(function (result) {
+			var albumId = result[0].albums.items[0].id;
+			app.trackPromises.push(app.getTracksByAlbumId(albumId));
+		});
+		app.getTracks(app.trackPromises);
+	});
+};
+
+// at this point we have made a request for all of the tracks associated with each album and we are waiting for them to come back
+app.getTracks = function (promises) {
+	var _$2;
+
+	(_$2 = $).when.apply(_$2, _toConsumableArray(promises))
+	// when the .done fires, we now have all of our tracks associated with each one of our albums
+	.done(function () {
+		for (var _len2 = arguments.length, tracklists = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+			tracklists[_key2] = arguments[_key2];
+		}
+
+		// we loop over each one of our track lists that correspond to each one of our movies
+		tracklists.forEach(function (albumTracks, index) {
+			// because the number of albums and the number of movies are identical in length and in the same order we can use their indexes to match them up to each other
+			app.moviesArray[index].uris = [];
+			// here we ^^ create an empty array to store the uris in once we grab them from each tracklist
+			// we loop over each track individually to grab its uri
+			albumTracks[0].items.forEach(function (item) {
+				// we push each individual track's uri into the uri list that corresponds with each individual movie, using the index in order to match up the uri to its corresponding uri array in its corresponding movie
+				app.moviesArray[index].uris.push(item.uri);
+			});
+			app.pushToHandleBars(app.moviesArray[index]);
+		});
+		app.tilt();
+		// finally what we end up with is an array that contains five objects. each object represents one movie. each movie has a uris property which is an array, and this array contains three spotify ids that correspond to the three tracks that are most popular for that particular movie
+	});
+};
+
+// gets album if from the spotify
+app.getAlbumData = function (movieName) {
+	return $.ajax({
+		url: albumBaseUrl + 'search/',
+		method: 'GET',
+		headers: {
+			Authorization: albumToken
+		},
+		data: {
+			q: movieName + ' soundtrack',
+			type: 'album',
+			limit: 1
+		}
+	});
+};
+
+app.getTracksByAlbumId = function (id) {
+	return $.ajax({
+		url: albumBaseUrl + ('albums/' + id + '/tracks'),
+		method: 'GET',
+		headers: {
+			Authorization: albumToken
+		},
+		data: {
+			limit: 3
+		}
+	});
+};
+
+// connects to handlebars and display movie info on the html
+app.pushToHandleBars = function (data) {
+	var dataTemplate = $('#data').html();
+	var compileDataTemplate = Handlebars.compile(dataTemplate);
+	var finalDataTemplate = compileDataTemplate(data);
+	$('ul').append(finalDataTemplate);
+};
+
+app.form = function () {
+	$('form').on('submit', function (e) {
+		e.preventDefault();
+		var movieName = $('#movie-name').val();
+		var movie = {};
+		var getMoviesDataPromise = app.getMovieFromForm(movieName);
+		var albumIdPromise = app.getAlbumData(movieName);
+
+		$.when(getMoviesDataPromise).then(function (data) {
+			if (data.total_results === 0) {
+				alert('Please enter another movie name... ');
+			} else {
+				var movies = data.results[0];
+				movie.id = 0;
+				movie.title = movies.title;
+				movie.image = movieImageBaseUrl + movies.poster_path;
+				movie.overview = movies.overview;
+				movie.releaseDate = movies.release_date;
+
+				$.when(albumIdPromise).then(function (album) {
+					if (album.albums.total === 0) {
+						alert('Please enter another movie name... ');
+					} else {
+						var albumId = album.albums.items[0].id;
+						var getSingleAlbum = app.getTracksByAlbumId(albumId);
+						$.when(getSingleAlbum).then(function (albumObject) {
+							var trackIdsArray = [];
+							albumObject.items.forEach(function (track) {
+								trackIdsArray.push(track.uri);
+							});
+							movie.uris = trackIdsArray;
+							app.displayContentForm(movie);
+							app.tilt();
+						});
+					}
+				});
+			}
+		});
+		$('#movie-name').val('');
+	});
+};
+
+app.getMovieFromForm = function (movieName) {
+	return $.ajax({
+		url: movieBaseApiUrl + '/search/movie',
+		method: 'GET',
+		dataType: 'JSON',
+		data: {
+			api_key: movieApiKey,
+			language: 'en-US',
+			query: movieName
+		}
+	});
+};
+
+app.displayContentForm = function (movie) {
+	var dataTemplate = $('#data').html();
+	var compileDataTemplate = Handlebars.compile(dataTemplate);
+	var finalDataTemplate = compileDataTemplate(movie);
+
+	$('ul').html(finalDataTemplate);
+};
+
+app.tilt = function () {
+
+	if ($(window).width() > 760) {
+		$("ul").tiltedpage_scroll({
+			sectionContainer: "> .container", // In case you don't want to use <section> tag, you can define your won CSS selector here
+			angle: 20, // You can define the angle of the tilted section here. Change this to false if you want to disable the tilted effect. The default value is 50 degrees.
+			opacity: true, // You can toggle the opacity effect with this option. The default value is true
+			scale: false, // You can toggle the scaling effect here as well. The default value is true.
+			outAnimation: true // In case you do not want the out animation, you can toggle this to false. The defaul value is true.
+		});
+	}
+};

@@ -1,0 +1,221 @@
+/*
+HEADING FONT: font-family: 'Montserrat', sans-serif;
+BODY FONT:    font-family: 'Open Sans', sans-serif;
+*/
+body {
+  margin: 0;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.7))), url(../../images/cinema.jpg) bottom/cover;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7)), url(../../images/cinema.jpg) bottom/cover;
+  background-attachment: fixed;
+  font-family: 'Open Sans', sans-serif; }
+
+header {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: relative;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif; }
+
+.header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  -webkit-transform: translate(-50%, -60%);
+          transform: translate(-50%, -60%);
+  text-align: center; }
+  .header p {
+    font-size: 30px;
+    text-transform: uppercase;
+    color: #c7f464;
+    font-style: italic; }
+  .header i {
+    color: lightgrey;
+    font-size: 75px;
+    opacity: 0.8; }
+
+h1 {
+  font-size: 175px;
+  text-align: center;
+  font-weight: bold;
+  display: block;
+  margin: 0px;
+  line-height: 1em; }
+
+.three-dee {
+  color: #556270;
+  text-shadow: 10px 6px rgba(78, 205, 196, 0.8), -10px 3px rgba(199, 244, 100, 0.8);
+  letter-spacing: 2px; }
+
+footer {
+  clear: both;
+  width: 100%;
+  margin-top: 10;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase; }
+  footer .footer {
+    text-align: center; }
+  footer a {
+    text-decoration: none; }
+
+ul {
+  padding: 0;
+  max-width: 65%;
+  margin: 5% auto;
+  list-style-type: none; }
+
+.container {
+  text-align: center;
+  color: #a8c0db;
+  margin: 2% 0; }
+  .container h2 {
+    float: left;
+    width: 100%;
+    color: #c7f464;
+    font-size: 25px; }
+  .container .left {
+    float: left;
+    width: 35%; }
+    .container .left img {
+      display: block;
+      margin: 10% auto;
+      width: 200px; }
+    .container .left p {
+      text-align: center; }
+  .container .right {
+    float: left;
+    width: 63%; }
+    .container .right .overview {
+      text-align: left;
+      text-overflow: ellipsis; }
+  .container .spotify {
+    float: left;
+    width: 100%; }
+    .container .spotify .iframe {
+      width: 95%; }
+      .container .spotify .iframe:nth-child(2) {
+        margin: 0.5% 0; }
+
+.tps-wrapper {
+  background: #556270;
+  -webkit-box-shadow: 5px 10px rgba(78, 205, 196, 0.8), -7px 6px rgba(199, 244, 100, 0.8);
+          box-shadow: 5px 10px rgba(78, 205, 196, 0.8), -7px 6px rgba(199, 244, 100, 0.8); }
+
+form {
+  width: 65%;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 1%;
+  background-color: #556270;
+  font-size: 18px;
+  color: #c7f464;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  -webkit-box-shadow: 7px 12px rgba(78, 205, 196, 0.8), -9px 8px rgba(199, 244, 100, 0.8);
+          box-shadow: 7px 12px rgba(78, 205, 196, 0.8), -9px 8px rgba(199, 244, 100, 0.8);
+  z-index: 1; }
+  form .search-items {
+    display: inline-block;
+    width: 30.33%; }
+    form .search-items #movie-name {
+      width: 100%;
+      height: 2vh;
+      padding: 1%;
+      font-size: 16px; }
+      form .search-items #movie-name:focus {
+        outline: none;
+        border: 3px #c7f464 solid; }
+  form button {
+    color: #c7f464;
+    cursor: pointer;
+    padding: 2% 10%;
+    font-size: 18px;
+    border: 1px #c7f464 solid;
+    background-color: transparent;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase; }
+  form button:hover {
+    background-color: #a8c0db; }
+
+footer {
+  margin-bottom: 6%;
+  float: left; }
+  footer .f-top {
+    color: #c7f464; }
+    footer .f-top a {
+      color: #c7f464;
+      font-size: 65px; }
+  footer .f-bottom {
+    font-size: 12px; }
+    footer .f-bottom a {
+      color: #c7f464;
+      margin: 0 2%; }
+
+.isStuck {
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  left: 50%; }
+
+@media (max-width: 1175px) {
+  form {
+    width: 90%; }
+  ul {
+    max-width: 90%; } }
+
+@media (max-width: 760px) {
+  .container .overview, .left p {
+    display: none; }
+  .container h2 {
+    font-size: 24px; }
+  .container .left {
+    width: 40%; }
+  .container .right {
+    width: 60%; }
+  .container .left img {
+    width: 200px; }
+  .container .spotify {
+    margin-top: 28px; }
+    .container .spotify iframe {
+      width: 90%;
+      height: 100px; } }
+
+@media (max-width: 840px) {
+  h1 {
+    font-size: 100px; }
+  .header p {
+    font-size: 18px; } }
+
+@media (max-width: 575px) {
+  .container .left {
+    display: none; }
+  .container .right {
+    width: 100%; }
+    .container .right .iframe {
+      width: 90%; } }
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 60px; }
+  h2 {
+    margin-top: 10%; }
+  .right {
+    border-top: 2px #4ecdc4 solid; }
+    .right .spotify .iframe {
+      width: 90%; }
+  .three-dee {
+    color: #c7f464;
+    text-shadow: none;
+    letter-spacing: 2px; }
+  form {
+    text-align: none;
+    margin: 0 auto; }
+  form .search-items {
+    width: 75%; }
+  form [for="movie-name"] {
+    display: none; }
+  form button {
+    margin-top: 4%;
+    padding: 2% 5%;
+    font-size: 12px; } }
