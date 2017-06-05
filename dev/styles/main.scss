@@ -1,7 +1,3 @@
-
-
-
-
 /*
 HEADING FONT: font-family: 'Montserrat', sans-serif;
 BODY FONT:    font-family: 'Open Sans', sans-serif;
@@ -16,7 +12,7 @@ $VerySoftBlue: #a8c0db;
 
 body {
   margin: 0;
-  background: linear-gradient(0deg,rgba(85, 98, 112, .85),rgba(85, 98, 112, .5)), url(../../images/background2.jpg);
+  background: linear-gradient(0deg,rgba(0, 0, 0, 0.7)), url(../../images/cinema.jpg) bottom/cover;
   background-attachment: fixed;
   font-family: 'Open Sans', sans-serif;
 }
@@ -36,12 +32,17 @@ header {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -60%);
+  text-align: center;
     p {
-      text-align: center;
-      font-size: 22px;
+      font-size: 30px;
       text-transform: uppercase;
       color: $SoftGreen;
       font-style: italic;
+    }
+    i{
+      color: lightgrey;
+      font-size: 75px;
+      opacity: 0.8;
     }
 }
 
@@ -74,7 +75,6 @@ footer {
     }
 }
 
-
 //MAIN CONTENT
 
 ul{ 
@@ -84,7 +84,6 @@ ul{
   margin: 5% auto;
   list-style-type: none;
 }
-
 
 .container{ //this is the li
   text-align: center;
@@ -96,7 +95,6 @@ ul{
       color: $SoftGreen;
       font-size: 25px;
     }
-
     .left{
       float: left;
       // height: 1%;
@@ -107,13 +105,11 @@ ul{
           margin: 10% auto;
           width: 200px;
         }
-
         p{
           text-align: center;
           // background-color: lightpink;
         }
     }
-
     .right{
       float: left;
       width: 63%;
@@ -121,10 +117,8 @@ ul{
         .overview{
           text-align: left;
           text-overflow: ellipsis;
-
         }
     }
-
     .spotify{
       float: left;
       width: 100%;
@@ -135,7 +129,6 @@ ul{
         }
       }
     }
-
   } 
 
   .tps-wrapper,{
@@ -160,7 +153,6 @@ form {
   text-transform: uppercase;
   box-shadow: 7px 12px rgba(#4ecdc4,0.8), -9px 8px rgba(#c7f464,0.8);
   z-index: 1;
-
     .search-items {
       display: inline-block;
       width: 30.33%;
@@ -175,8 +167,7 @@ form {
         }
       }
     }
-
-    button {
+    button{
       color: $SoftGreen;
       cursor: pointer;
       padding: 2% 10%;
@@ -190,20 +181,18 @@ form {
       background-color: $VerySoftBlue;
     }
 }
-
 footer{
-  // border: 1px $SoftGreen solid;
+  margin-bottom: 6%;
   float: left;
-  // margin-top: 5%;
   .f-top{
     color: $SoftGreen;
     a{
       color: $SoftGreen;
-      font-size: 30px;
+      font-size: 65px;
     }
   }
   .f-bottom{
-    font-size: 10px;
+    font-size: 12px;
     a{
       color: $SoftGreen;
       margin: 0 2%;
@@ -211,18 +200,10 @@ footer{
   }
 
 }
-
 .isStuck {
   transform: translateX(-50%);
   left: 50%;
 }
-
-
-
-
-
-
-
 
 
 @media (max-width: 1175px){
