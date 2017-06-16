@@ -11,23 +11,43 @@ var movieBaseApiUrl = 'https://api.themoviedb.org/3';
 var movieImageBaseUrl = 'https://image.tmdb.org/t/p/w500';
 var albumBaseUrl = 'https://api.spotify.com/v1/';
 
-var albumToken = 'Bearer BQDZNdYZMaRu-RhRn2g1lb4nb0nf07c-WFSZEpTN8eenyHoS9Y0enExNFqZBm7bKGQihTydLCcswe_rb0A_q6XGssQbYWxrHFM6Eyi70Hs_Xp7BGS3dqfssypSVeCGMT1UAaJMMoqRIZs0JV-dgnibpAyXIo';
-
 // document ready function
 $(function () {
-	app.init();
+	app.auth().then(app.init);
 });
+// ""
+app.auth = function () {
+	return $.ajax({
+		url: 'https://proxy.hackeryou.com',
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			'Accept': 'application/json'
+		},
+		data: JSON.stringify({
+			reqUrl: 'https://accounts.spotify.com/api/token',
+			params: {
+				grant_type: 'client_credentials'
+			},
+			proxyHeaders: {
+				'Authorization': 'Basic OTRjY2MxOTlkYzAwNDE5OTg0ZTU5NDgyM2JkYWYwMTQ6ZmMxZWM4NWU5MmFiNDY3MWJhM2M5NjViZjI3Y2E5Mzc='
+			}
+		})
+	});
+};
+
+app.authHeaders = {};
 
 // functions fired on page load
-app.init = function () {
+app.init = function (authData) {
+
+	app.authHeaders = {
+		'Authorization': authData.token_type + ' ' + authData.access_token
+	};
 	app.getMoviesData();
 	app.form();
 
-	jQuery(function ($) {
-		$(document).ready(function () {
-			$('.navbar-wrapper').stickUp();
-		});
-	});
+	$('.navbar-wrapper').stickUp();
 
 	$('.anchor-scroll').anchorScroll({
 		scrollSpeed: 900, // scroll speed
@@ -115,12 +135,11 @@ app.getTracks = function (promises) {
 
 // gets album if from the spotify
 app.getAlbumData = function (movieName) {
+
 	return $.ajax({
 		url: albumBaseUrl + 'search/',
 		method: 'GET',
-		headers: {
-			Authorization: albumToken
-		},
+		headers: app.authHeaders,
 		data: {
 			q: movieName + ' soundtrack',
 			type: 'album',
@@ -133,9 +152,7 @@ app.getTracksByAlbumId = function (id) {
 	return $.ajax({
 		url: albumBaseUrl + ('albums/' + id + '/tracks'),
 		method: 'GET',
-		headers: {
-			Authorization: albumToken
-		},
+		headers: app.authHeaders,
 		data: {
 			limit: 3
 		}
