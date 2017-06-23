@@ -76,14 +76,13 @@ app.getMoviesData = function(){
 
 // data from the moviedb api is stored in an object and sent to displayContent method 
 app.getPopularMovies = function(movies){
-	for(var i = 0; i < 5; i++){
+	for(var i = 0; i < 4; i++){
 		var movie = {};
 		movie.id = i;
 		movie.title = movies[i].title;
 		movie.image = movieImageBaseUrl + movies[i].poster_path;
-		movie.overview = movies[i].overview;
-		movie.releaseDate = movies[i].release_date;
-
+		movie.overview = movies[i].overview.substring(0, 100) + '...';
+		movie.releaseDate = moment(movies[i].release_date).format('MMM YYYY');
 		app.albumPromises.push(app.getAlbumData(movie.title));
 		app.moviesArray.push(movie);
 	}
@@ -172,8 +171,8 @@ app.form = function(){
 					movie.id = 0;
 					movie.title = movies.title;
 					movie.image = movieImageBaseUrl + movies.poster_path;
-					movie.overview = movies.overview;
-					movie.releaseDate = movies.release_date;
+					movie.overview = movies.overview.substring(0, 100) + '...';;
+					movie.releaseDate = moment(movies.release_date).format('MMM YYYY');
 
 					$.when(albumIdPromise)
 						.then(function(album){

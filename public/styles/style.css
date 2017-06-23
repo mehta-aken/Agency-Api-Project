@@ -2,6 +2,9 @@
 HEADING FONT: font-family: 'Montserrat', sans-serif;
 BODY FONT:    font-family: 'Open Sans', sans-serif;
 */
+a {
+  color: #c7f464; }
+
 body {
   margin: 0;
   background: -webkit-gradient(linear, left bottom, left top, from(rgba(0, 0, 0, 0.7))), url(../../images/cinema.jpg) bottom/cover;
@@ -85,7 +88,8 @@ ul {
       text-align: center; }
   .container .right {
     float: left;
-    width: 63%; }
+    width: 63%;
+    margin-top: 14px; }
     .container .right .overview {
       text-align: left;
       text-overflow: ellipsis; }
@@ -93,7 +97,7 @@ ul {
     float: left;
     width: 100%; }
     .container .spotify .iframe {
-      width: 95%; }
+      width: 100%; }
       .container .spotify .iframe:nth-child(2) {
         margin: 0.5% 0; }
 

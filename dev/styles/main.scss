@@ -9,7 +9,9 @@ $VeryDarkGreyishBlue: #556270;
 $ModerateCyan: #4ecdc4;
 $SoftGreen: #c7f464;
 $VerySoftBlue: #a8c0db;
-
+a {
+  color: $SoftGreen;
+}
 body {
   margin: 0;
   background: linear-gradient(0deg,rgba(0, 0, 0, 0.7)), url(../../images/cinema.jpg) bottom/cover;
@@ -113,7 +115,7 @@ ul{
     .right{
       float: left;
       width: 63%;
-
+      margin-top: 14px;
         .overview{
           text-align: left;
           text-overflow: ellipsis;
@@ -123,7 +125,7 @@ ul{
       float: left;
       width: 100%;
       .iframe{
-        width: 95%;
+        width: 100%;
         &:nth-child(2){
           margin: 0.5% 0;
         }
