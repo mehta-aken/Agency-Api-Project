@@ -15,7 +15,7 @@ var albumBaseUrl = 'https://api.spotify.com/v1/';
 $(function () {
 	app.auth().then(app.init);
 });
-// ""
+
 app.auth = function () {
 	return $.ajax({
 		url: 'https://proxy.hackeryou.com',
@@ -97,8 +97,10 @@ app.getPopularMovies = function (movies) {
 		}
 
 		results.forEach(function (result) {
-			var albumId = result[0].albums.items[0].id;
-			app.trackPromises.push(app.getTracksByAlbumId(albumId));
+			if (result[0].albums.items.length === 1) {
+				var albumId = result[0].albums.items[0].id;
+				app.trackPromises.push(app.getTracksByAlbumId(albumId));
+			}
 		});
 		app.getTracks(app.trackPromises);
 	});

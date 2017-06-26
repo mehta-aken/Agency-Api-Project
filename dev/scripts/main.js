@@ -11,7 +11,7 @@ const albumBaseUrl = 'https://api.spotify.com/v1/';
 $(function(){
 	app.auth().then(app.init);
 });
-// ""
+
 app.auth = () => {
 	return $.ajax({
 		url: 'https://proxy.hackeryou.com',
@@ -90,8 +90,11 @@ app.getPopularMovies = function(movies){
 	$.when(...app.albumPromises)
 		.done(function(...results) {
 			results.forEach(function(result) {
-				const albumId = result[0].albums.items[0].id;
-				app.trackPromises.push(app.getTracksByAlbumId(albumId));
+				if(result[0].albums.items.length === 1) {
+					const albumId = result[0].albums.items[0].id;
+					app.trackPromises.push(app.getTracksByAlbumId(albumId));
+				}
+				
 			});
 			app.getTracks(app.trackPromises);
 		});
